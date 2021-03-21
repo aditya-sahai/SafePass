@@ -1,0 +1,36 @@
+/* Setting BG Image */
+body {
+    background-image: url("images/index-bg.jpg");
+}
+
+/* Styling Heading */
+#heading-box h1.display-1 {
+    font-size: 11rem;
+}
+
+.row {
+    height: 80vh;
+}
+
+@media (max-width: 992px) {
+    #heading-box h1.display-1 {
+        font-size: 9rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #heading-box h1.display-1 {
+        font-size: 6rem;
+    }
+}
+/* ----------------------------------- */
+
+/* Styling HR */
+hr {
+    width: 50%;
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+/* ----------------------------------- */

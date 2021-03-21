@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_link %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row align-items-center">
+    <div class="col-md-1 col-0"></div>
+    <div class="col-md-10 col-12" id="heading-box">
+        <h1 class="display-1 text-center">SafePass</h1>
+        <hr>
+        <p class="lead text-center">
+            Feed me your password . . .
+        </p>
+    </div>
+    <div class="col-md-1 col-0"></div>
+</div>
+{% endblock %}
