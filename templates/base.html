@@ -7,14 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SafePass</title>
 
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% block css_link %}
-    {% endblock %}
-
     <script src="{% static 'bootstrap/jquery-3.5.1.slim.min.js' %}"></script>
     <script src="{% static 'bootstrap/popper.min.js' %}"></script>
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}?{% now 'U' %}">
+    {% block css_link %}
+    {% endblock %}
 
 </head>
 <body>
@@ -25,15 +28,35 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav container">
-                <a class="nav-link mx-3" href="#">Passwords</a>
-                <a class="nav-link mx-3" href="{% url 'users:user_login' %}">Login</a>
-                <a class="nav-link mx-3" href="{% url 'users:user_logout' %}">Logout</a>
-                <a class="nav-link ml-lg-auto mr-lg-5 ml-5" href="#">Account</a>
+            <div class="navbar-nav">
+                <a class="nav-link mx-3 ml-5" href="#">Passwords</a>
+                <a class="nav-link mx-3 ml-5" href="#">Manage Passwords</a>
+                <div class="dropdown nav-link ml-lg-auto mr-lg-5 ml-5 p-0" id="account-icon">
+                    <button class="btn btn-dark dropdown-toggle pl-0 pl-lg-2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Account
+                        &nbsp;
+                        {% if user.is_authenticated %}
+                            <!-- Code To Display Users PFP  -->
+                            <!-- <img src="user-pfp.png" width="25" height="25" class="rounded-circle"> -->
+                        {% else %}
+                            <img src="/media/pfp/default-pfp.png" width="25" height="25" class="rounded-circle">
+                        {% endif %}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {% if user.is_authenticated %}
+                            <a class="dropdown-item" href="{% url 'users:user_logout' %}">Logout</a>
+                        {% else %}
+                            <a class="dropdown-item" href="{% url 'users:user_login' %}">Login</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'users:user_signup' %}">Signup</a>
+                        <a class="dropdown-item" href="#">Change Profile Info</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container" id="content">
         {% block content %}
         {% endblock %}
     </div>

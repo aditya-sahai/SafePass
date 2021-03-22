@@ -3,10 +3,11 @@ body {
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Blinker', sans-serif;
 }
 
-.container {
-    height: 100%;
+#content {
+    padding-top: 5rem;
 }
 
 #navbarNavAltMarkup .navbar-nav {

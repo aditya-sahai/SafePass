@@ -1,3 +1,8 @@
+/* Setting Padding For content to prevent overlapping with navbar */
+#content {
+    padding-top: 3rem;
+}
+
 /* Setting BG Image */
 body {
     background-image: url("images/index-bg.jpg");

@@ -9,3 +9,6 @@ def user_login(request):
 
 def user_logout(request):
     return render(request, "users/user_logout.html")
+
+def user_signup(request):
+    return render(request, "users/user_signup.html")

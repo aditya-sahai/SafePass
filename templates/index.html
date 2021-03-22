@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block css_link %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}?{% now 'U' %}">
 {% endblock %}
 
 {% block content %}
