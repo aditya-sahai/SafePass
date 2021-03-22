@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load static %}
+{%load crispy_forms_tags %}
+
+{% block css_link %}
+<link rel="stylesheet" href="{% static 'css/users/user_signup.css' %}?{% now 'U' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Signup!</h1>
+<div class="row">
+    <h1 class="display-2 col-xl-4 my-auto mx-auto">Signup</h1>
+    <form action="" method="POST" class="col-xl-8 mt-3 pl-5">
+        {% csrf_token %}
+        <div class="form-group">
+            <!-- <label for="username">Username</label> -->
+            <!-- <input type="text" id="username" class="form-control" name="username"> -->
+            {{ form.username|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            <!-- <label for="email">Email</label> -->
+            <!-- <input type="email" id="email" class="form-control" placeholder="name@mail.com" name="email"> -->
+            {{ form.email|as_crispy_field }}
+        </div>
+        <div class="form-group mt-5">
+            <!-- <label for="password">Password</label> -->
+            <!-- <input type="password" id="password" class="form-control" name="password"> -->
+            {{ form.password|as_crispy_field }}
+        </div>
+        <div class="form-group">
+            <!-- <label for="verify_password">Confirm Password</label> -->
+            <!-- <input type="password" id="verify_password" class="form-control" name="verify_password"> -->
+            {{ form.confirm_password|as_crispy_field }}
+        </div>
+        <!-- {{ form|crispy }} -->
+        <input type="submit" value="Sign Me Up!" class="btn btn-primary mt-3">
+    </form>
+</div>
 {% endblock %}

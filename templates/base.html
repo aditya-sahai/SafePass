@@ -32,25 +32,23 @@
                 <a class="nav-link mx-3 ml-5" href="#">Passwords</a>
                 <a class="nav-link mx-3 ml-5" href="#">Manage Passwords</a>
                 <div class="dropdown nav-link ml-lg-auto mr-lg-5 ml-5 p-0" id="account-icon">
-                    <button class="btn btn-dark dropdown-toggle pl-0 pl-lg-2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    <button class="btn btn-dark dropdown-toggle pl-0 pl-lg-2 mr-5" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Account
-                        &nbsp;
                         {% if user.is_authenticated %}
-                            <!-- Code To Display Users PFP  -->
-                            <!-- <img src="user-pfp.png" width="25" height="25" class="rounded-circle"> -->
+                            {{ user.username|title }}
                         {% else %}
-                            <img src="/media/pfp/default-pfp.png" width="25" height="25" class="rounded-circle">
+                            Login
                         {% endif %}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         {% if user.is_authenticated %}
                             <a class="dropdown-item" href="{% url 'users:user_logout' %}">Logout</a>
+                            <a class="dropdown-item" href="#">Manage Account</a>
+                            <a class="dropdown-item" href="{% url 'users:user_signup' %}">Create New Account</a>
                         {% else %}
                             <a class="dropdown-item" href="{% url 'users:user_login' %}">Login</a>
+                            <a class="dropdown-item" href="{% url 'users:user_signup' %}">Signup</a>
                         {% endif %}
-                        <a class="dropdown-item" href="{% url 'users:user_signup' %}">Signup</a>
-                        <a class="dropdown-item" href="#">Change Profile Info</a>
                     </div>
                 </div>
             </div>

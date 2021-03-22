@@ -1,0 +1,25 @@
+body {
+    background-image: url("/static/css/images/signup-bg.jpg");
+}
+
+/* Making Grid Responsive */
+.row {
+    margin-top: 5rem!important;
+}
+
+form {
+    border-left: solid 3px black;
+}
+
+.asteriskField {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .row {
+        margin-top: 2rem!important;
+    }
+    form {
+        border-left: none;
+    }
+}

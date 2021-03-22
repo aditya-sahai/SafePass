@@ -5,7 +5,7 @@
 
 /* Setting BG Image */
 body {
-    background-image: url("images/index-bg.jpg");
+    background-image: url("/static/css/images/index-bg.jpg");
 }
 
 /* Styling Heading */
