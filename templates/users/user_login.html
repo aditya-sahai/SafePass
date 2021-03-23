@@ -10,6 +10,14 @@
 <div class="row">
     <h1 class="display-2 col-xl-4 my-auto mx-auto">Login</h1>
     <form method="POST" class="col-xl-8 mt-3 pl-5">
+        {% if not credentials_are_valid %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Invalid username or password!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
         {% csrf_token %}
         <div class="form-group">
             <label for="username">Username</label>

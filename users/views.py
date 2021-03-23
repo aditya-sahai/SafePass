@@ -13,11 +13,18 @@ def user_login(request):
         password = request.POST.get("password")
 
         user = authenticate(username=username, password=password)
+
         if user:
             login(request, user)
             return redirect("/")
 
-    return render(request, "users/user_login.html")
+        else:
+            credentials_are_valid = False
+
+    else:
+        credentials_are_valid = True
+
+    return render(request, "users/user_login.html", {"credentials_are_valid": credentials_are_valid})
 
 def user_logout(request):
     logout(request)
