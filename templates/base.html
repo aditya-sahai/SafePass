@@ -29,8 +29,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link mx-3 ml-5" href="#">Passwords</a>
-                <a class="nav-link mx-3 ml-5" href="#">Manage Passwords</a>
+                <a class="nav-link mx-3 ml-5" href="{% url 'passwords:view_passwords' %}">Passwords</a>
+                <a class="nav-link mx-3 ml-5" href="{% url 'passwords:manage_passwords' %}">Manage Passwords</a>
                 <div class="dropdown nav-link ml-lg-auto mr-lg-5 ml-5 p-0" id="account-icon">
                     <button class="btn btn-dark dropdown-toggle pl-0 pl-lg-2 mr-5" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">

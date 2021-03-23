@@ -2,3 +2,5 @@ venv
 SafePass/__pycache__
 users/__pycache__
 users/migrations/__pycache__
+passwords/__pycache__
+passwords/migrations/__pycache__
