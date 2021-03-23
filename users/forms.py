@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 
 
-class UserForm(forms.ModelForm):
+class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), label="Password", validators=[validate_password])
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm Password")
 
@@ -12,14 +12,13 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("username","email","password")
+        fields = ("username", "email", "password")
 
-    # def clean(self):
-    #     cleaned_data = super(UserForm, self).clean()
-    #     password = cleaned_data.get("password")
-    #     confirm_password = cleaned_data.get("confirm_password")
+    def clean_email(self):
+        user_email = self.cleaned_data["email"]
+        users = list(User.objects.raw(f"SELECT * FROM auth_user where email='{user_email}';"))
 
-    #     # print(f"{password}{confirm_password}")
+        if users != []:
+            self.add_error("email", "User with that email already exists.")
 
-    #     if password != confirm_password:
-    #         self.add_error("password", "Passwords do not match.")
+        return user_email
