@@ -139,4 +139,4 @@ STATICFILES_DIRS = [
 # MEDIA_ROOT = MEDIA_DIR
 # MEDIA_URL = "/media/"
 
-# LOGIN_URL = "/basic_app/login"
+LOGIN_URL = "/user/login"

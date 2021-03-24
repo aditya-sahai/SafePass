@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
-from users.forms import SignUpForm
+from users.forms import SignUpForm, ChangePasswordForm
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -41,7 +42,7 @@ def user_signup(request):
         if signup_form.is_valid():
 
             user = signup_form.save()
-            print(user.email)
+            # print(user.email)
             user.set_password(user.password)
             user.save()
 
@@ -53,3 +54,41 @@ def user_signup(request):
         signup_form = SignUpForm()
 
     return render(request, "users/user_signup.html", {"form": signup_form})
+
+@login_required()
+def change_password(request):
+
+    password_changed = False
+
+    if request.method == "POST":
+
+        change_password_form = ChangePasswordForm(request.POST)
+        user = request.user
+
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_new_password")
+
+        if new_password != confirm_password:
+            change_password_form.add_error("new_password", "Passwords do not match.")
+
+        # print(user.check_password(old_password))
+
+        if not user.check_password(old_password):
+            change_password_form.add_error("old_password", "Invalid Password.")
+
+        if change_password_form.is_valid():
+            user.set_password(new_password)
+            user.save()
+            login(request, user)
+            password_changed = True
+            change_password_form = ChangePasswordForm()
+
+    else:
+        change_password_form = ChangePasswordForm()
+
+    return render(request, "users/change_password.html", {
+            "form": change_password_form,
+            "password_changed": password_changed,
+        }
+    )

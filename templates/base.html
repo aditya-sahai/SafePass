@@ -43,7 +43,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         {% if user.is_authenticated %}
                             <a class="dropdown-item" href="{% url 'users:user_logout' %}">Logout</a>
-                            <a class="dropdown-item" href="#">Manage Account</a>
+                            <a class="dropdown-item" href="{% url 'users:change_password' %}">Change Password</a>
                             <a class="dropdown-item" href="{% url 'users:user_signup' %}">Create New Account</a>
                         {% else %}
                             <a class="dropdown-item" href="{% url 'users:user_login' %}">Login</a>

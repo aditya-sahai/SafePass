@@ -22,3 +22,8 @@ class SignUpForm(forms.ModelForm):
             self.add_error("email", "User with that email already exists.")
 
         return user_email
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput(), label="Old Password")
+    new_password = forms.CharField(widget=forms.PasswordInput(), label="New Password", validators=[validate_password])
+    confirm_new_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm New Password")
