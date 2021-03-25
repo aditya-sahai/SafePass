@@ -27,19 +27,3 @@ class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput(), label="Old Password")
     new_password = forms.CharField(widget=forms.PasswordInput(), label="New Password", validators=[validate_password])
     confirm_new_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm New Password")
-
-    # def clean_new_password(self):
-    #     new_password = self.cleaned_data["new_password"]
-    #     contains_digit = False
-
-    #     for digit in string.digits:
-    #         if digit in new_password:
-    #             contains_digit = True
-
-    #     if new_password.lower() == new_password:
-    #         self.add_error("new_password", "Password must contain at least 1 uppercase character.")
-
-    #     if not contains_digit:
-    #         self.add_error("new_password", "Password must contain at least 1 number.")
-
-    #     return new_password

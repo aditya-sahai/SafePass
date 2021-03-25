@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from users.forms import SignUpForm, ChangePasswordForm
 from django.contrib.auth.decorators import login_required
+from users.authenticate import check_pw, add_pepper
 
 
 def index(request):
@@ -13,7 +14,7 @@ def user_login(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        user = authenticate(username=username, password=password)
+        user = check_pw(password, username)
 
         if user:
             login(request, user)
@@ -43,7 +44,7 @@ def user_signup(request):
 
             user = signup_form.save()
             # print(user.email)
-            user.set_password(user.password)
+            user.set_password(add_pepper(user.password))
             user.save()
 
             login(request, user)
@@ -78,7 +79,7 @@ def change_password(request):
             change_password_form.add_error("old_password", "Invalid Password.")
 
         if change_password_form.is_valid():
-            user.set_password(new_password)
+            user.set_password(add_pepper(new_password))
             user.save()
             login(request, user)
             password_changed = True
