@@ -18,6 +18,9 @@ class DigitValidator:
                 code="all_chars_password",
             )
 
+    def get_help_text(self):
+        return _("You password must contain at least 1 digit.")
+
 class LowerCaseValidator:
     def validate(self, password, user=None):
         """
@@ -35,6 +38,9 @@ class LowerCaseValidator:
                 _("Password must contain at least 1 lowercase character."),
                 code="all_chars_uppercase",
             )
+
+    def get_help_text(self):
+        return _("You password must contain at least 1 lowercase character.")
 
 class UpperCaseValidator:
     def validate(self, password, user=None):
@@ -54,6 +60,9 @@ class UpperCaseValidator:
                 code="all_chars_lowercase",
             )
 
+    def get_help_text(self):
+        return _("You password must contain at least 1 uppercase character.")
+
 class SymbolValidator:
     def validate(self, password, user=None):
         """
@@ -71,3 +80,6 @@ class SymbolValidator:
                 _("Password must contain at least 1 symbol."),
                 code="no_symbols",
             )
+
+    def get_help_text(self):
+        return _("You password must contain at least 1 symbol")
