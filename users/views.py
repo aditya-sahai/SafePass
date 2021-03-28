@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from users.forms import SignUpForm, ChangePasswordForm
 from django.contrib.auth.decorators import login_required
-from users.authenticate import check_pw, add_pepper
+from users.utils.authenticate import check_pw, add_pepper
 
 
 def index(request):
@@ -43,9 +43,13 @@ def user_signup(request):
         if signup_form.is_valid():
 
             user = signup_form.save()
-            # print(user.email)
+
+            Sender = EmailSender(user)
+            Sender.send_new_user_mail()
+
             user.set_password(add_pepper(user.password))
             user.save()
+
 
             login(request, user)
 
