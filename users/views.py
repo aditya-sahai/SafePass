@@ -14,6 +14,7 @@ def user_login(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
+        # print(password, )
         user = check_pw(password, username)
 
         if user:
@@ -77,9 +78,7 @@ def change_password(request):
         if new_password != confirm_password:
             change_password_form.add_error("new_password", "Passwords do not match.")
 
-        # print(user.check_password(old_password))
-
-        if not user.check_password(old_password):
+        if not check_pw(old_password, user.username):
             change_password_form.add_error("old_password", "Invalid Password.")
 
         if change_password_form.is_valid():
