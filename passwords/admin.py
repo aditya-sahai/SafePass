@@ -1,3 +1,5 @@
 from django.contrib import admin
+from passwords.models import AppPassword, Key
 
-# Register your models here.
+admin.site.register(AppPassword)
+admin.site.register(Key)
