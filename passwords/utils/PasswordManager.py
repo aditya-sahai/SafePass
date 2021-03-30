@@ -53,13 +53,21 @@ class PasswordManager:
         else:
             return False
 
+    def encrpyt_password(self, password, key):
+        """
+        Returns encrypted password for editing
+        """
+
+        cryptor = Fernet(key.encode())
+        return cryptor.encrypt(password.encode()).decode()
+
 
 if __name__ == "__main__":
     a = User.objects.get(username="aditya")
     Manager = PasswordManager(a)
 
     app = input("Enter name of app: ")
-    # password = input(f"Enter password for {app}: ")
+    password = input(f"Enter password for {app}: ")
 
-    # Manager.save_new_password(app, password)
-    Manager.decrypt_saved_data(app)
+    Manager.save_new_password(app, password)
+    # Manager.decrypt_saved_data(app)

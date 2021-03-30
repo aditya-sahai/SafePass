@@ -21,5 +21,6 @@ app_name = "passwords"
 
 urlpatterns = [
     path('view-passwords/', views.view_passwords, name="view_passwords"),
-    path('manage-passwords/', views.manage_passwords, name="manage_passwords"),
+    path('new-password/', views.new_password, name="new_password"),
+    path('edit-password/<str:app>/', views.edit_password, name="edit_password"),
 ]
