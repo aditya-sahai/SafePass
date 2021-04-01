@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from passwords.models import AppPassword, Key
 from passwords.utils.PasswordManager import PasswordManager
 from django.contrib.auth.decorators import login_required
+from passwords.forms import AppPasswordForm
 
 
 @login_required()
@@ -39,7 +40,19 @@ def view_passwords(request):
 
 @login_required()
 def new_password(request):
-    return render(request, "passwords/new_password.html")
+    if request.method == "POST":
+        form = AppPasswordForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            Manager = PasswordManager(request.user)
+            Manager.save_new_password(app=data["app"], password=data["password"])
+            return redirect("/passwords/view-passwords/")
+
+    else:
+        form = AppPasswordForm()
+
+    return render(request, "passwords/new_password.html", context={"form": form})
 
 @login_required()
 def edit_password(request, app):
